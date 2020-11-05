@@ -11,6 +11,7 @@ import com.bidiptoroy.weatherapp.Model.WeatherInfo
 import com.bidiptoroy.weatherapp.R
 
 class WeatherAdapter(var context:Context,var weatherList: ArrayList<WeatherInfo>): RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
+
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         var txtCity: TextView = view.findViewById(R.id.txtCity)
@@ -30,7 +31,7 @@ class WeatherAdapter(var context:Context,var weatherList: ArrayList<WeatherInfo>
 
         var weather = weatherList[position]
         holder.txtCity.text = weather.city
-//        holder.txtCountry.text = weather.country
+        holder.txtCountry.text = weather.country
         holder.txtCondition.text = weather.condition
         holder.txtTemp.text = weather.temp.toString() + "°C"
     }

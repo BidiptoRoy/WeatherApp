@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="5.5"
             android:weightSum="10"
             android:orientation="vertical"
             android:layout_margin="10dp">
@@ -36,11 +36,13 @@
             android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/txtCountry"
+                android:id="@+id/txtCondition"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
-                android:text="India"
+                android:text="Partly Cloudy"
+                android:textStyle="bold"
+
                 android:padding="5dp"
                 android:textSize="15sp"
                 android:textColor="@color/black"/>
@@ -50,7 +52,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="2.5"
             android:weightSum="10"
             android:orientation="vertical"
             android:layout_margin="10dp">
@@ -61,17 +63,19 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:text="35°C"
-                android:textSize="25sp"
+
+                android:textSize="20sp"
                 android:padding="2dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/txtCondition"
+                android:id="@+id/txtCountry"
+                android:text="India"
+
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
-                android:text="Partly Cloudy"
                 android:padding="5dp"
                 android:textSize="20sp"
                 android:textColor="@color/black"/>

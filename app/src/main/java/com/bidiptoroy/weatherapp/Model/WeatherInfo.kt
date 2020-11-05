@@ -1,7 +1,7 @@
 package com.bidiptoroy.weatherapp.Model
 
 data class WeatherInfo(var city:String,
-//                       var country: String,
+                       var country: String,
                        var localTime: String,
                        var temp: Double,
                        var condition:String,
