@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var imgHomeCity:ImageView
     lateinit var homeRecyclerView: RecyclerView
     lateinit var homeRecyclerAdapter : WeatherAdapter
     lateinit var linearLayoutManager: RecyclerView.LayoutManager
@@ -114,6 +116,7 @@ var count =10
         txtHomeCondition = findViewById(R.id.homeCondition)
         txtHomeTemp = findViewById(R.id.homeTemp)
 
+        imgHomeCity = findViewById(R.id.imageHomeCity)
         val url2 = "http://api.openweathermap.org/data/2.5/weather?q=$city&appid=e525c6a59c9c327c7720388ee28708d2&units=metric"
         val queue = Volley.newRequestQueue(this)
         if(ConnectionManager().checkConnectivity(this)){
@@ -139,6 +142,11 @@ var count =10
                         txtHomeCountry.text = w.country
                         txtHomeCondition.text = w.condition
                         txtHomeTemp.text = w.temp.toString() + "°C"
+                        if (w.temp>=20){
+                            imgHomeCity.setImageResource(R.drawable.hot)
+                        }
+                        if(w.temp<20)                            imgHomeCity.setImageResource(R.drawable.cold)
+
                         var coordinates = it.getJSONObject("coord")
                         lat = coordinates.getDouble("lat")
                         lon = coordinates.getDouble("lon")

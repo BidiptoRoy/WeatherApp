@@ -1,9 +1,11 @@
 package com.bidiptoroy.weatherapp.Adapter
 
 import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +21,7 @@ class WeatherAdapter(var context:Context,var weatherList: ArrayList<WeatherInfo>
         var txtTemp: TextView = view.findViewById(R.id.txtTemp)
         var txtCondition: TextView = view.findViewById(R.id.txtCondition)
         var llConnent : LinearLayout = view.findViewById(R.id.homeContent)
-
+        var imgWeather : ImageView = view.findViewById(R.id.imgWeather)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +32,18 @@ class WeatherAdapter(var context:Context,var weatherList: ArrayList<WeatherInfo>
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         var weather = weatherList[position]
+        if(weather.temp >= 20){
+            holder.imgWeather.setImageResource(R.drawable.hot)
+        }
+        if(weather.temp<20){
+            holder.imgWeather.setImageResource(R.drawable.cold)
+
+        }
         holder.txtCity.text = weather.city
         holder.txtCountry.text = weather.country
         holder.txtCondition.text = weather.condition
         holder.txtTemp.text = weather.temp.toString() + "°C"
+
     }
     fun updateList(list: ArrayList<WeatherInfo>){
         weatherList.clear()
