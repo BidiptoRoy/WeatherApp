@@ -12,6 +12,9 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.Data
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -19,7 +22,9 @@ import com.bidiptoroy.weatherapp.Adapter.WeatherAdapter
 import com.bidiptoroy.weatherapp.Model.WeatherInfo
 import com.bidiptoroy.weatherapp.R
 import com.bidiptoroy.weatherapp.util.ConnectionManager
+import com.bidiptoroy.weatherapp.util.WeatherWorker
 import org.json.JSONObject
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +40,7 @@ lateinit var searchButton :SearchView
     lateinit var txtHomeCountry: TextView
     lateinit var txtHomeTemp: TextView
     lateinit var txtHomeCondition: TextView
-var count =5
+var count =10
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +52,7 @@ var count =5
 
 
 //        if (searchButton.query != null) city = searchButton.query.toString()
-//        setUpHome(city)
+       setUpHome(city)
 
         searchButton.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -73,10 +78,33 @@ var count =5
         homeRecyclerView =findViewById(R.id.recyclerHome)
         linearLayoutManager= LinearLayoutManager(this)
         homeRecyclerView.layoutManager = linearLayoutManager
-        fetchData(lat,lon, count)
-        homeRecyclerAdapter = WeatherAdapter(this,list)
+//        fetchData(lat, lon, count)
+        homeRecyclerAdapter = WeatherAdapter(this, list)
         homeRecyclerView.itemAnimator = DefaultItemAnimator()
         homeRecyclerView.adapter = homeRecyclerAdapter
+
+        // Create the Data object:
+
+
+        // CREATE DATA OBJECT FOR PASSING DATA TO WORK MANAGER (IF NEEDED)
+
+        // Create the Data object:
+        val myData = Data.Builder()
+                .build()
+
+
+        // BUILD WORK REQUEST FOR WORK MANAGER
+        val weatherWork = PeriodicWorkRequest.Builder(WeatherWorker::class.java, 15, TimeUnit.MINUTES)
+                .setInputData(myData)
+                .setInitialDelay(20, TimeUnit.SECONDS) // Constraints
+                .build()
+
+        // GET INSTANCE OF WORK MANAGER
+
+
+        // GET INSTANCE OF WORK MANAGER
+        WorkManager.getInstance(this).enqueue(weatherWork)
+
     }
 
     private fun setUpHome(city: String) {
@@ -110,7 +138,7 @@ var count =5
                         txtHomeCity.text = city
                         txtHomeCountry.text = w.country
                         txtHomeCondition.text = w.condition
-                        txtHomeTemp.text = w.temp.toString()+"°C"
+                        txtHomeTemp.text = w.temp.toString() + "°C"
                         var coordinates = it.getJSONObject("coord")
                         lat = coordinates.getDouble("lat")
                         lon = coordinates.getDouble("lon")
@@ -121,7 +149,7 @@ var count =5
             }
             queue.add(jsonObjectRequest)
             list.clear()
-            fetchData(lat,lon,count)
+            fetchData(lat, lon, count)
 
 
         }else{
@@ -175,7 +203,7 @@ var count =5
                             )
                             list.add(weatherInfo)
                         }
-                        homeRecyclerAdapter = WeatherAdapter(this,list)
+                        homeRecyclerAdapter = WeatherAdapter(this, list)
                         homeRecyclerView.itemAnimator = DefaultItemAnimator()
                         homeRecyclerView.adapter = homeRecyclerAdapter
 

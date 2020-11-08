@@ -68,7 +68,7 @@
                 android:id="@+id/homeTemp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-
+                android:text="0°C"
                 android:textColor="#009900"
                 android:textStyle="bold"
                 android:textSize="25sp"
@@ -79,6 +79,7 @@
                 android:id="@+id/homeCondition"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:text="Cloudy"
 
                 android:textColor="#fff"
                 android:textStyle="bold"
@@ -88,14 +89,14 @@
     </LinearLayout>
 
     <SearchView
+
         android:elevation="5dp"
         android:id="@+id/search_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:layout_weight="1"
-        android:background="#E0E2E6"
-
+        android:layout_margin="5dp"
+        android:layout_weight=".5"
+        android:background="@drawable/round_search_bar"
         android:padding="5dp"
         android:queryHint="Search Your City"
         app:queryHint="Search Your City" />
@@ -106,12 +107,12 @@
         android:layout_weight=".7"
         android:layout_margin="5dp"
         android:padding="2dp"
-        android:background="#F1E8BF"
+        android:background="#82ECE2"
         android:text="Weather condition of nearby cities"
         android:textColor="@color/black"
 
         android:textAlignment="center"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:textSize="20sp"
         />
 
@@ -119,7 +120,7 @@
         android:id="@+id/recyclerHome"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5.3"
+        android:layout_weight="5.8"
         android:layout_margin="10dp"
         android:padding="5dp"/>
 
