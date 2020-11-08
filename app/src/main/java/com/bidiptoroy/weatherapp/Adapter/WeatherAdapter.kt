@@ -20,7 +20,7 @@ class WeatherAdapter(var context:Context,var weatherList: ArrayList<WeatherInfo>
         var txtCountry: TextView = view.findViewById(R.id.txtCountry)
         var txtTemp: TextView = view.findViewById(R.id.txtTemp)
         var txtCondition: TextView = view.findViewById(R.id.txtCondition)
-        var llConnent : LinearLayout = view.findViewById(R.id.homeContent)
+//        var llConnent : LinearLayout = view.findViewById(R.id.homeContent)
         var imgWeather : ImageView = view.findViewById(R.id.imgWeather)
     }
 
